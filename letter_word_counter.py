@@ -1,17 +1,27 @@
 from collections import Counter
 
-# text = input('Enter text: ')
-text = 'Ajhoj sdfsdf fgfhgd'
-letter_dict = Counter()
-word_dict = Counter()
+text = input('Enter text: ')
 
-for i in text:
-    if i not in [' ', '.', ',', ':', ';', '...', ';']:
-        letter_dict.update(i)
 
-text_list = text.split()
-for i in text_list:
-    word_dict.update([i])
+def key_value_print(counter):
+    for key, value in counter.items():
+        print(f'{key}: {value}')
 
-print(word_dict)
-print(letter_dict)
+
+def calc_letter(text):
+    letter_dict = Counter()
+    for i in text:
+        if i not in [' ', '.', ',', ':', ';', '...', ';', '(', ')']:
+            letter_dict.update(i.lower())
+    return key_value_print(letter_dict)
+
+
+def calc_word(text):
+    word_dict = Counter()
+    text_list = text.lower().split()
+    for i in text_list:
+        word_dict.update([i])
+    return key_value_print(word_dict)
+
+# calc_word(text)
+# calc_letter(text)
