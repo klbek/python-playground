@@ -72,8 +72,16 @@ def show_all():
     return library_dictionary['books']
 
 
+def delete_book(name: str = None, author: str = None, year: int = None):
+    with open('library_manager/my_library.json', mode='r+', encoding='utf-8') as file:
+        library_dictionary = json.load(file)
+        
+      
+
 
 # init_library() # use only for the first time
 # add_book('Jak nespat', 'Lex', 2010)
 # print(find_book(author='Dan'))
-print(show_all())
+# print(show_all())
+
+delete_book(name='Jak nespat')
