@@ -28,6 +28,17 @@ def add_book(name: str, author: str, year=int):
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=5)
 
+def find_book(name: str = None, author: str = None, year: int = None):
+    with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
+        library_dictionary = json.load(file)
+        return library_dictionary
 
 # init_library() # use only for the first time
-add_book('test', 'author', 2014)
+# add_book('test2', 'John', 2014)
+libr = find_book()
+search = 'John'
+for record in libr["books"]:
+    if search in record.values():
+        print(record)
+
+
