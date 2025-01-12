@@ -30,40 +30,45 @@ def add_book(id: int ,name: str, author: str = None, year=int):
         json.dump(file_data, file, ensure_ascii=False, indent=5)
 
 
-def find_book(name: str = None, author: str = None, year: int = None):
+def find_book(id: str = None, name: str = None, author: str = None, year: int = None):
     with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
         library_dictionary = json.load(file)
 
-    search = [name, author, year]
-    id_number = len(search) - search.count(None)
-    matching_books = []
+    if id:
+        for key_id, value_book_record in library_dictionary["books"].items():
+            if key_id == id:
+                return value_book_record
 
-    for book_record in library_dictionary["books"]:
-        book_name = book_record['name']
-        book_author = book_record['author']
-        book_year = book_record['year']
+    # search = [name, author, year]
+    # id_number = len(search) - search.count(None)
+    # matching_books = []
 
-        if id_number == 3:
-            if book_name == name and book_author == author and book_year == year:
-                matching_books.append(book_record)
+    # for book_record in library_dictionary["books"]:
+    #     book_name = book_record['name']
+    #     book_author = book_record['author']
+    #     book_year = book_record['year']
 
-        if id_number == 2:
-            if book_name == name and book_author == author:
-                matching_books.append(book_record)
-            if book_author == author and book_year == year:
-                matching_books.append(book_record)
-            if book_name == name and book_year == year:
-                matching_books.append(book_record)
+    #     if id_number == 3:
+    #         if book_name == name and book_author == author and book_year == year:
+    #             matching_books.append(book_record)
 
-        if id_number == 1:
-            if book_name == name:
-                matching_books.append(book_record)
-            if book_author == author:
-                matching_books.append(book_record)
-            if book_year == year:
-                matching_books.append(book_record)
+    #     if id_number == 2:
+    #         if book_name == name and book_author == author:
+    #             matching_books.append(book_record)
+    #         if book_author == author and book_year == year:
+    #             matching_books.append(book_record)
+    #         if book_name == name and book_year == year:
+    #             matching_books.append(book_record)
 
-    return matching_books
+    #     if id_number == 1:
+    #         if book_name == name:
+    #             matching_books.append(book_record)
+    #         if book_author == author:
+    #             matching_books.append(book_record)
+    #         if book_year == year:
+    #             matching_books.append(book_record)
+
+    # return matching_books
 
 def show_all():
     with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
@@ -96,8 +101,9 @@ def delete_book(name: str = None, author: str = None, year: int = None):
 
 
 # init_library() # use only for the first time
-add_book(2,'Jak nespat', 'Tax', 2010)
-# print(find_book(author='Dan'))
+# add_book(4,'Na vesnici', 'José', 2001)
+print(find_book(id='1'))
+# print(find_book(author='Dax'))
 # print(show_all())
 
 # delete_book(name='test2', author='John', year=2014)
