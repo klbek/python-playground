@@ -65,7 +65,15 @@ def find_book(name: str = None, author: str = None, year: int = None):
 
     return matching_books
 
+def show_all():
+    with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
+        library_dictionary = json.load(file)
+
+    return library_dictionary['books']
+
+
 
 # init_library() # use only for the first time
 # add_book('Jak nespat', 'Lex', 2010)
-print(find_book(author='Dan'))
+# print(find_book(author='Dan'))
+print(show_all())
