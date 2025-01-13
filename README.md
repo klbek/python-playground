@@ -1,0 +1,2 @@
+# Python playground
+This repository contains a collection of Python exercises and projects I am working on to improve my coding skills, with a focus on problem-solving, algorithms, and practical applications.
