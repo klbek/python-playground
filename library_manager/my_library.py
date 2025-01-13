@@ -29,36 +29,21 @@ def add_book(id: int ,name: str, author: str = None, year=int):
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=5)
 
-def find_book(searchParams):
-    """
 
-    """
-
-def find_book(id: str = None, name: str = None, author: str = None, year: int = None):
+def find_book(**kwargs):
     with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
         library_dictionary = json.load(file)
+    query_id = kwargs.get('id')
 
-    if id:
-        return library_dictionary["books"].get(id, None)
+    if query_id:
+        return library_dictionary["books"].get(kwargs['id'], None)
     
-    if not id:
-        book_record_list = []
+    filtered_books = []
+    for book_record in library_dictionary["books"].values():
+        if all(book_record.get(key) == value for key, value in kwargs.items() if key != 'id'):
+            filtered_books.append(book_record)
+    return filtered_books
 
-        for book_record in library_dictionary["books"].values():
-            book_name = book_record['name']
-            book_author = book_record['author']
-            book_year = book_record['year']
-
-            if book_name == name:
-                book_record_list.append(book_record)  
-            if book_author == author:
-                book_record_list.append(book_record) 
-            if book_year == year:
-                book_record_list.append(book_record) 
-
-        return book_record_list
-
-    
 
 def show_all():
     with open('library_manager/my_library.json', mode='r', encoding='utf-8') as file:
@@ -92,8 +77,9 @@ def delete_book(name: str = None, author: str = None, year: int = None):
 
 # init_library() # use only for the first time
 # add_book(6,'Na vesnici', 'Tax', 2020)
-print(find_book(id='1'))
-# print(find_book(author='Tax', year=2020))
+# print(find_book(id='1'))
+print(find_book(author='Tax', year=2020))
+# print(find_book(author='Tax'))
 # print(show_all())
 
 # delete_book(name='test2', author='John', year=2014)
