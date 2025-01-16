@@ -1,2 +1,4 @@
 library_manager/my_library.json
 playground-venv
+__pycache__
+.pytest_cache
